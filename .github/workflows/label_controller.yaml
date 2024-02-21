@@ -1,0 +1,38 @@
+name: Label Controller
+
+on:
+  pull_request:
+    types: [labeled, unlabeled]
+
+jobs:
+  trigger_on_label_impact_breaking:
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'impact/breaking') }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Update PR Description
+        run: |
+          # Extract PR number
+          PR_NUMBER=$(echo "${GITHUB_REF}" | cut -d'/' -f3)
+
+          # Get current PR description
+          PR_DESCRIPTION=$(curl -s -X GET -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}" | \
+            jq -r '.body')
+
+          # Define markdown text block to append from file
+          if [[ "${{ github.event.action }}" == 'labeled' && "${{ github.event.label.name }}" == 'impact: breaking' ]]; then
+            TEXT_TO_APPEND=$(cat .github/templates/breaking-changes.md)
+            UPDATED_DESCRIPTION="${PR_DESCRIPTION}\n\n${TEXT_TO_APPEND}"
+          elif [[ "${{ github.event.action }}" == 'unlabeled' && "${{ github.event.label.name }}" == 'impact: breaking' ]]; then
+            # Remove text from PR description
+            UPDATED_DESCRIPTION=$(echo "${PR_DESCRIPTION}" | sed '/## Breaking Changes/,/---/d')
+          fi
+
+          # Update PR description
+          curl -s -X PATCH -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"body\": \"${UPDATED_DESCRIPTION}\"}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}"

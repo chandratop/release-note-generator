@@ -30,3 +30,29 @@ jobs:
           gh pr edit $PR_NUMBER --body "$UPDATED_DESCRIPTION"
     env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  trigger_on_label_impact_deprecate:
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'impact/deprecate') }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Update PR Description
+        run: |
+          # Extract PR number
+          PR_NUMBER=$(echo "${GITHUB_REF}" | cut -d'/' -f3)
+
+          # Define markdown text block to append from file
+          if [[ "${{ github.event.action }}" == 'labeled' && "${{ github.event.label.name }}" == 'impact: breaking' ]]; then
+            TEXT_TO_APPEND=$(cat .github/templates/breaking-changes.md)
+            UPDATED_DESCRIPTION=$(gh pr view $PR_NUMBER --json body --jq ".body + \"\n\n${TEXT_TO_APPEND}\"")
+          elif [[ "${{ github.event.action }}" == 'unlabeled' && "${{ github.event.label.name }}" == 'impact: breaking' ]]; then
+            # Remove text from PR description
+            UPDATED_DESCRIPTION=$(gh pr view $PR_NUMBER --json body --jq "gsub(\"## Breaking Changes.*---\", \"\")")
+          fi
+
+          # Update PR description
+          gh pr edit $PR_NUMBER --body "$UPDATED_DESCRIPTION"
+    env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,17 @@
+# name: Pull Request Validator
+
+# on:
+#   pull_request:
+#     types: [opened, reopened, edited, synchronize]
+
+# jobs:
+#   validator:
+#     runs-on: ubuntu-latest
+
+#     env:
+#       PR_NUMBER: ${{ github.event.number }}
+
+#     steps:
+#       - name: Validate Pull Request
+#         id: validate_pr
+#         run: "python3 .github/scripts/pr_validator.py $PR_NUMBER"

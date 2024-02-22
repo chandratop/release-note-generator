@@ -1,0 +1,17 @@
+# name: Pull Request Formatter
+
+# on:
+#   pull_request:
+#     types: [label]
+
+# jobs:
+#   validator:
+#     runs-on: ubuntu-latest
+
+#     env:
+#       PR_NUMBER: ${{ github.event.number }}
+
+#     steps:
+#       - name: Format Pull Request
+#         id: format_pr
+#         run: "python3 .github/scripts/pr_formatter.py $PR_NUMBER"

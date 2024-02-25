@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Check path
-        id: validate_pr
+        id: check_path
         run: |
           ls
           pwd

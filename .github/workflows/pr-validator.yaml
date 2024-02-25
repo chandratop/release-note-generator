@@ -2,9 +2,9 @@ name: Pull Request Validator
 
 on:
   pull_request:
-    types: [opened, reopened, synchronize]
-  pull_request_target:
-    types: [edited]
+    types: edited
+    branches:
+      - main
 
 jobs:
   validator:

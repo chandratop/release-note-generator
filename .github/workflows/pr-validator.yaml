@@ -12,6 +12,12 @@ jobs:
       PR_NUMBER: ${{ github.event.number }}
 
     steps:
+      - name: Check path
+        id: validate_pr
+        run: |
+          ls
+          pwd
+
       - name: Validate Pull Request
         id: validate_pr
         run: "python3 .github/scripts/pr_validator.py $PR_NUMBER"

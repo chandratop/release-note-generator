@@ -12,6 +12,11 @@ jobs:
       PR_NUMBER: ${{ github.event.number }}
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Format Pull Request
         id: format_pr
         run: "python3 .github/scripts/pr_formatter.py $PR_NUMBER"

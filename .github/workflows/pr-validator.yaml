@@ -14,11 +14,10 @@ jobs:
       PR_NUMBER: ${{ github.event.number }}
 
     steps:
-      - name: Check path
-        id: check_path
-        run: |
-          ls
-          pwd
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Validate Pull Request
         id: validate_pr

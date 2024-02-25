@@ -22,3 +22,5 @@ jobs:
       - name: Validate Pull Request
         id: validate_pr
         run: "python3 .github/scripts/pr_validator.py $PR_NUMBER"
+        env:
+          GH_TOKEN: ${{ github.token }}

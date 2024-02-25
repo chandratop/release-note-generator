@@ -20,3 +20,5 @@ jobs:
       - name: Format Pull Request
         id: format_pr
         run: "python3 .github/scripts/pr_formatter.py $PR_NUMBER"
+        env:
+          GH_TOKEN: ${{ github.token }}

@@ -1,0 +1,15 @@
+changelog:
+  exclude:
+    labels:
+      - ignore
+  categories:
+    - title: New Features & Enhancements 🎉
+      labels:
+        - type/feature
+        - type/enhancement
+    - title: Breaking Changes 🛠
+      labels:
+        - type/breaking
+    - title: Other Changes
+      labels:
+        - "*"

@@ -2,7 +2,7 @@ name: Pull Request Formatter
 
 on:
   pull_request:
-    types: [label, unlabel]
+    types: [label, unlabel, edited]
 
 jobs:
   validator:

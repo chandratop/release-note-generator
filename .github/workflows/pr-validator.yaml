@@ -1,26 +1,26 @@
-# name: Pull Request Validator
+name: Pull Request Validator
 
-# on:
-#   pull_request:
-#     types: edited
-#     branches:
-#       - main
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+    branches:
+      - main
 
-# jobs:
-#   validator:
-#     runs-on: ubuntu-latest
+jobs:
+  validator:
+    runs-on: ubuntu-latest
 
-#     env:
-#       PR_NUMBER: ${{ github.event.number }}
+    env:
+      PR_NUMBER: ${{ github.event.number }}
 
-#     steps:
-#       - name: Checkout Repository
-#         uses: actions/checkout@v4
-#         with:
-#           fetch-depth: 0
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-#       - name: Validate Pull Request
-#         id: validate_pr
-#         run: "python3 .github/scripts/pr_validator.py $PR_NUMBER"
-#         env:
-#           GH_TOKEN: ${{ github.token }}
+      - name: Validate Pull Request
+        id: validate_pr
+        run: "python3 .github/scripts/pr_validator.py $PR_NUMBER"
+        env:
+          GH_TOKEN: ${{ github.token }}

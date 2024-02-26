@@ -56,29 +56,29 @@ class PR:
         This function validates the list of labels attadched to the pr and if
         it passes all the checks then it organizes the labels into a groups
         dict and returns it. The different groups are: `type`, `impact`,
-        `global`, `help` & `size`.
+        `global` & `help`.
 
         The checks performed are:
         - If the label has a sub-type using a `/` then it should exist
-        - There can't be more than one `type`, `help` and `size` label
-        - There needs to be one `type` and `size` label
+        - There can't be more than one `type` label
+        - There needs to be one `type` label
 
         Any custom label which doesn't have a `/` will be grouped under `global`
         """
 
-        groups = {"type": [], "impact": [], "global": [], "help": [], "size": []}
+        groups = {"type": [], "impact": [], "global": [], "help": []}
         for label in self.labels:
             if "/" in label:
                 label_split = label.split("/")
                 if label_split[0] in groups:
-                    if label_split[0] in ["type", "help", "size"] and len(groups[label_split[0]]) != 0:
+                    if label_split[0] in ["type"] and len(groups[label_split[0]]) != 0:
                         raise ValueError(f"Only one '{label_split[0]}' label is allowed on a pull request.")
                     groups[label_split[0]].append(label_split[1])
                 else:
                     raise KeyError(f"Label group '{label_split[0]}' not found.")
             else:
                 groups["global"].append(label)
-        for group in ["type", "size"]:
+        for group in ["type"]:
             if len(groups[group]) != 1:
                 raise ValueError(f"No '{group}' label found. One required.")
         return groups

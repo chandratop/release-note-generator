@@ -4,6 +4,7 @@
 
 ### Related Jira Tickets
 <!--- Please mention the Jira tickets using the following format: [JIRA-LABEL](URL) -->
+<!--- MANDATORY (can't be N/A) for fix, enh, feat, break -->
 - N/A
 
 -----
@@ -43,6 +44,17 @@
 
 ### Breaking Changes
 <!--- list down the breaking changes associated with this pull request -->
+<!--- MANDATORY (can't be N/A) for break -->
 - N/A
 
 -----
+
+<!--- Example Pull Request Titles:
+
+fix(PLAT-1234): this is a bugfix pr
+enh(PLAT-1234): this is a enhancement pr
+feat(PLAT-1234): this is a feature pr
+break(PLAT-1234): this is a breaking change pr
+chore: this is a chore pr
+
+-->

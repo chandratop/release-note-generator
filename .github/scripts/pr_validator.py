@@ -1,5 +1,5 @@
 """
-script: validator.py
+script: pr_validator.py
 
 This script validates a pull request's title, body & branch name.
 If all the validations pass then it will allow merging the pull request.
@@ -68,7 +68,7 @@ class PR:
             else:
                 return match.group(2)
 
-    def validate_body(self, pr_type) -> None:
+    def validate_body(self, pr_type: str) -> None:
         """
         If the pr_type is one of `fix`, `enh`, `feat` or `break`,
         then the `Related Jira Tickets` section should not have `N/A`.
@@ -103,7 +103,7 @@ class PR:
             if number_of_points == 0:
                 raise ValueError(f"Breaking Changes section cannot be empty")
 
-    def validate_branch(self, pr_type) -> None:
+    def validate_branch(self, pr_type: str) -> None:
         """
         If any `type` label which is associated with a Jira is attached then
         the pull request branch should start with the Jira ID
@@ -117,6 +117,41 @@ class PR:
         if not bool(re.match(pattern, self.branch)):
             raise ValueError(f"Improper branch: {self.branch}")
 
+    def labeler(self, pr_type: str) -> None:
+        """
+        Post all checks are complete, it will validate and if needed
+        correct the labels attached to the PR
+        """
+
+        type_mapping = {
+            "fix": "type/bugfix",
+            "enh": "type/enhancement",
+            "feat": "type/feature",
+            "break": "type/breaking",
+            "chore": "type/chore"
+        }
+        remove_label = list()
+        add_label = list()
+        for label in self.labels:
+            if label.startswith("type/"):
+                if label != type_mapping[pr_type]:
+                    if label not in remove_label:
+                        remove_label.append(label)
+        if type_mapping[pr_type] not in add_label and type_mapping[pr_type] not in self.labels:
+            add_label.append(type_mapping[pr_type])
+
+        # Form the command to fix labels
+        cmd = f'gh pr edit "{self.pr_number}"'
+        if len(add_label) > 0:
+            labels_str = ",".join(add_label)
+            cmd += f' --add-label "{labels_str}"'
+        if len(remove_label) > 0:
+            labels_str = ",".join(remove_label)
+            cmd += f' --remove-label "{labels_str}"'
+        if cmd != f'gh pr edit "{self.pr_number}"':
+            result = run(cmd)
+            if not result.fine:
+                raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
 
 if __name__ == "__main__":
 
@@ -130,4 +165,5 @@ if __name__ == "__main__":
     # Validate
     pr_type = pr.validate_title()
     pr.validate_body(pr_type)
-    # pr.validate_branch(pr_type)
+    pr.validate_branch(pr_type)
+    pr.labeler(pr_type)

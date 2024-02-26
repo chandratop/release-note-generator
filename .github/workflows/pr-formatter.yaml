@@ -8,6 +8,8 @@ jobs:
   validator:
     runs-on: ubuntu-latest
 
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'edited' && contains(github.event.changes.labels, 'from') }}
+
     env:
       PR_NUMBER: ${{ github.event.number }}
 

@@ -1,17 +1,17 @@
 name: Pull Request Formatter
 
 on:
-  pull_request:
-    types: [labeled, unlabeled]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Pull Request Number'
+        required: true
 
 jobs:
-  validator:
+  formatter:
     runs-on: ubuntu-latest
-
-    if: ${{ github.event_name == 'pull_request' && github.event.action == 'edited' && contains(github.event.changes.labels, 'from') }}
-
     env:
-      PR_NUMBER: ${{ github.event.number }}
+      PR_NUMBER: ${{ github.event.inputs.pr_number }}
 
     steps:
       - name: Checkout Repository
@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
 
       - name: Format Pull Request
-        id: format_pr
-        run: "python3 .github/scripts/pr_formatter.py $PR_NUMBER"
+        run: |
+          python3 .github/scripts/pr_formatter.py $PR_NUMBER
         env:
           GH_TOKEN: ${{ github.token }}

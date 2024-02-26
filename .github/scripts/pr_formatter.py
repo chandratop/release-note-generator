@@ -104,7 +104,7 @@ if __name__ == "__main__":
     pr = PRFormatter(args.pr_number)
 
     # Take backup
-    pr.save_previous_pr()
+    # pr.save_previous_pr()
 
     # Format
     pr.format_pr_body(

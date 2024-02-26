@@ -22,13 +22,13 @@ class PRFormatter(PR):
 
         body = ""
         if self.label_groups["type"][0] in ["chore", "documentation"]:
-            with open("../templates/no-jira.md") as f:
+            with open(".github/templates/no-jira.md") as f:
                 body += f.read()
         else:
-            with open("../templates/jira.md") as f:
+            with open(".github/templates/jira.md") as f:
                 body += f.read()
         for impact_type in self.label_groups["impact"]:
-            with open(f"../templates/{impact_type}.md") as f:
+            with open(f".github/templates/{impact_type}.md") as f:
                 body += f.read()
         return body
 

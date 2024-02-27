@@ -410,3 +410,9 @@ if __name__ == "__main__":
         result = run(cmd)
         if not result.fine:
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
+
+        # Create the release
+        cmd = f'gh release create {release_tag} --notes RELEASE.md --title "{release_tag}"'
+        result = run(cmd)
+        if not result.fine:
+            raise ValueError(f"Command failed: {cmd}\nError: {result.what}")

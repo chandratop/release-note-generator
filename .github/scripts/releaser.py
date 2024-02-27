@@ -179,6 +179,8 @@ class Release:
             tag = match.group(2)
             tag_split: list[int] = list(map(int, tag.split(".")))
             tag_split[index] += 1
+            for i in range(index+1, 3):
+                tag_split[i] = 0
             return match.group(1) + ".".join(list(map(str, tag_split)))
         else:
             raise ValueError(f"Unable to calculate next tag for {self.tag}")

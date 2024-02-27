@@ -406,7 +406,7 @@ if __name__ == "__main__":
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
 
         # Create a pull request
-        cmd = f'gh pr create --base main --head {branch} --title "chore: {branch}" --label release --body-file .github/pull_request_template.md'
+        cmd = f'gh pr create --base main --head {branch} --title "chore: {branch}" --label release,ignore --body-file .github/pull_request_template.md'
         result = run(cmd)
         if not result.fine:
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
@@ -422,7 +422,7 @@ if __name__ == "__main__":
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
 
         # Create the release
-        cmd = f'gh release create {release_tag} --notes RELEASE.md --title "{release_tag}"'
+        cmd = f'gh release create {release_tag} --notes-file RELEASE.md --title "{release_tag}"'
         result = run(cmd)
         if not result.fine:
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")

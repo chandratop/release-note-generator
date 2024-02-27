@@ -58,7 +58,7 @@ class PR:
         ```
         """
 
-        pattern = r'^(fix|enh|feat|break)\(\w+-\d+\): [\w\d-\. ]+$|(chore): [\w\d-\. ]+$'
+        pattern = r'^(fix|enh|feat|break)\(\w+-\d+\): [\w\d\-\. ]+$|(chore): [\w\d\-\. ]+$'
         match = re.match(pattern, self.title)
         if not bool(match):
             raise ValueError(f"Improper title: {self.title}\nregex: '{pattern}'")

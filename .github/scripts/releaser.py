@@ -364,6 +364,16 @@ if __name__ == "__main__":
             with open(file_name, "w") as f:
                 f.write(body)
 
+        # Configure the bot
+        cmd = f'git config --local user.email "action@github.com"'
+        result = run(cmd)
+        if not result.fine:
+            raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
+        cmd = f'git config --local user.name "GitHub Action"'
+        result = run(cmd)
+        if not result.fine:
+            raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
+
         # Add the changes
         cmd = 'git add .'
         result = run(cmd)

@@ -400,3 +400,13 @@ if __name__ == "__main__":
         result = run(cmd)
         if not result.fine:
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
+
+    else:
+        branch_name = release.get_title_parts(args.action)["title"]
+        release_tag = branch_name[8:]
+
+        # Checkout to branch_name
+        cmd = f'git checkout {branch_name}'
+        result = run(cmd)
+        if not result.fine:
+            raise ValueError(f"Command failed: {cmd}\nError: {result.what}")

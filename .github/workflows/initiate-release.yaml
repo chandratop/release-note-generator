@@ -1,0 +1,22 @@
+name: Initiate GitHub Release
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 10 * * 5"  # Runs every Friday at 10:30 am UTC
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run releaser.py to initiate release
+        id: releaser
+        run: "python3 .github/scripts/releaser.py notes"
+        env:
+          GH_TOKEN: ${{ github.token }}

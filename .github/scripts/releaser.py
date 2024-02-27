@@ -6,6 +6,7 @@ This script helps create a GitHub Release, CHANGELOG and Breaking-Change-SOPs
 
 import os
 import re
+import sys
 import argparse
 from utils.utils import run
 from datetime import datetime
@@ -65,7 +66,7 @@ class Release:
         else:
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
 
-    def get_title_parts(self, pr) -> dict:
+    def get_title_parts(self, pr: str) -> dict:
         """
         Get the type and description from the pr title.
         """
@@ -83,7 +84,7 @@ class Release:
         else:
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
 
-    def get_author(self, pr) -> bool:
+    def get_author(self, pr: str) -> bool:
         """
         Get the author of the pr.
         """
@@ -98,7 +99,7 @@ class Release:
         else:
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
 
-    def get_url(self, pr) -> bool:
+    def get_url(self, pr: str) -> bool:
         """
         Get the url of the pr.
         """
@@ -110,7 +111,7 @@ class Release:
         else:
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
 
-    def get_jiras(self, pr) -> list:
+    def get_jiras(self, pr: str) -> list:
         """
         Get the list or jira tickets mentioned in the pr.
         """
@@ -131,7 +132,7 @@ class Release:
         else:
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
 
-    def get_sops(self, pr) -> list:
+    def get_sops(self, pr: str) -> list:
         """
         Get the list or SOPs mentioned in the prs.
         """
@@ -152,7 +153,7 @@ class Release:
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
         return sop
 
-    def is_ignore(self, pr) -> bool:
+    def is_ignore(self, pr: str) -> bool:
         """
         If the pr is labeled with `ignore` then return True, otherwise return False.
         """
@@ -341,10 +342,14 @@ class Release:
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Fetch Pull Request number')
-    parser.add_argument('action', help='notes or release')
+    parser.add_argument('action', help='notes or pr number')
     args = parser.parse_args()
 
     release = Release()
+
+    if release.prs == []:
+        print("No changes")
+        sys.exit(0)
 
     if args.action == "notes":
         release_details = release.get_release_details()
@@ -396,7 +401,10 @@ if __name__ == "__main__":
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
 
         # Create a pull request
-        cmd = f'gh pr create --base main --head {branch} --title "chore: {branch}" --label release --body-file .github/pull_request_template.md'
+        cmd = f'gh pr create --base main --head {branch} --title "chore: {branch}" --label release,ignore --body-file .github/pull_request_template.md'
         result = run(cmd)
         if not result.fine:
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
+
+    else:
+        next_release_tag = release.get_title_parts(args.action)["title"][8:]

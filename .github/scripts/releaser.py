@@ -363,3 +363,40 @@ if __name__ == "__main__":
             body = body.replace(f'{release.tag}', f'{release.next_tag}')
             with open(file_name, "w") as f:
                 f.write(body)
+
+        # Add the changes
+        cmd = 'git add .'
+        result = run(cmd)
+        if not result.fine:
+            raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
+
+        # Create a branch
+        branch = f'release-{release.next_tag}'
+        cmd = f'git checkout -b {branch}'
+        result = run(cmd)
+        if not result.fine:
+            raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
+
+        # Commit the changes
+        cmd = f'git commit -m "{branch}"'
+        result = run(cmd)
+        if not result.fine:
+            raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
+
+        # Push the changes
+        cmd = f'git push --set-upstream origin {branch}'
+        result = run(cmd)
+        if not result.fine:
+            raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
+
+        # Checkout to main branch
+        cmd = f'git checkout main'
+        result = run(cmd)
+        if not result.fine:
+            raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
+
+        # Create a pull request
+        cmd = f'gh pr create --base main --head {branch} --title "chore: {branch}" --label release'
+        result = run(cmd)
+        if not result.fine:
+            raise ValueError(f"Command failed: {cmd}\nError: {result.what}")

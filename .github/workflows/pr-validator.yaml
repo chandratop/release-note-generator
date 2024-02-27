@@ -2,7 +2,7 @@ name: Pull Request Validator
 
 on:
   pull_request:
-    types: [opened, edited, synchronize, labeled, unlabeled]
+    types: [opened, edited, labeled, unlabeled]
     branches:
       - main
 

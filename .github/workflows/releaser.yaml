@@ -1,0 +1,22 @@
+name: GitHub Releaser
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  release:
+    if: ${{ github.event.pull_request.merged && contains(github.event.pull_request.labels.*.name, 'release') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run releaser.py to initiate release
+        id: releaser
+        run: "python3 .github/scripts/releaser.py ${{ github.event.pull_request.number }}"
+        env:
+          GH_TOKEN: ${{ github.token }}

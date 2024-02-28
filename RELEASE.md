@@ -1,34 +1,17 @@
 <!-- Release notes generated using automated workflow -->
 
-## 1.0.0
-[0.0.1..1.0.0](https://github.com/chandratop/release-note-generation-demo/compare/0.0.1..1.0.0)
-<!--- feat header start -->
-### New Features & Enhancements 🎉
-<!--- feat header end -->
-<!--- feat body start -->
-| ID | Type | Title | Author | JIRA |
-| -------------- | -------------- | -------------- | -------------- | -------------- |
-| https://github.com/chandratop/release-note-generation-demo/pull/11 | enhancement | new enhancement | @chandratop | [PLAT-1000](https://amagiengg.atlassian.net/browse/PLAT-2608) |
+## 1.0.1
+[1.0.0..1.0.1](https://github.com/chandratop/release-note-generation-demo/compare/1.0.0..1.0.1)
 <!--- feat body end -->
-<!--- break header start -->
-### Breaking Changes 🛠
-<!--- break header end -->
-<!--- break body start -->
-| ID | Type | Title | Author | JIRA |
-| -------------- | -------------- | -------------- | -------------- | -------------- |
-| https://github.com/chandratop/release-note-generation-demo/pull/12 | breaking | breaker | @chandratop | [PLAT-1001](https://amagiengg.atlassian.net/browse/PLAT-2608) |
 <!--- break body end -->
-<!--- sop header start -->
-<details>
-  <summary><h4>Standard Operating Procedures</h4></summary>
-
-  <!--- sop header end -->
-  <!--- sop body start -->
-  https://github.com/chandratop/release-note-generation-demo/pull/12
-- do this ok?
-
-
 <!--- sop body end -->
 
 </details>
+<!--- other header start -->
+### Other Changes
+<!--- other header end -->
+<!--- other body start -->
+| ID | Type | Title | Author | JIRA |
+| -------------- | -------------- | -------------- | -------------- | -------------- |
+| https://github.com/chandratop/release-note-generator/pull/18 | bugfix | just imagine this is a sample bugfix pull request ok | @chandratop | [PIE-3817](https://amagiengg.atlassian.net/browse/PIE-3817), [PLAT-2608](https://amagiengg.atlassian.net/browse/PLAT-2608) |
 <!--- other body end -->

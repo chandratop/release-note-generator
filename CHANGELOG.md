@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 [2024-02-28]
+| ID | Type | Title | Author | JIRA |
+| -------------- | -------------- | -------------- | -------------- | -------------- |
+| https://github.com/chandratop/release-note-generator/pull/18 | bugfix | just imagine this is a sample bugfix pull request ok | @chandratop | [PIE-3817](https://amagiengg.atlassian.net/browse/PIE-3817), [PLAT-2608](https://amagiengg.atlassian.net/browse/PLAT-2608) |
 ## 1.0.0 [2024-02-27]
 | ID | Type | Title | Author | JIRA |
 | -------------- | -------------- | -------------- | -------------- | -------------- |

@@ -86,7 +86,7 @@ class PR:
                     number_of_points += 1
                     if "N/A" in line:
                         raise ValueError(f"Jira section cannot contain N/A")
-                    if not bool(re.match(r'^- +\[[A-Z]+-\d+\]\(https://[a-zA-Z0-9\./\-]+\)$', line)):
+                    if not bool(re.match(r'^- +\[[A-Z]+-\d+\]\(https://[a-zA-Z0-9\./\-]+\)$', line.strip())):
                         raise ValueError(f"Jira doesn't follow the format [JIRA-ID](URL)")
             if number_of_points == 0:
                 raise ValueError(f"Jira section cannot be empty")

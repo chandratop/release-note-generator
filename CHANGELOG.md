@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0 [2024-02-29]
+| ID | Type | Title | Author | JIRA |
+| -------------- | -------------- | -------------- | -------------- | -------------- |
+| https://github.com/chandratop/release-note-generator/pull/22 | breaking | ohhhh | @chandratop | [PLAT-2020](https://amagiengg.atlassian.net/browse/PLAT-2608), [PLAT-2020](https://amagiengg.atlassian.net/browse/PLAT-2608) |
+| https://github.com/chandratop/release-note-generator/pull/23 | bugfix | this is a fix | @chandratop | [PLAT-1022](https://amagiengg.atlassian.net/browse/PLAT-2608) |
 ## 1.0.1 [2024-02-28]
 | ID | Type | Title | Author | JIRA |
 | -------------- | -------------- | -------------- | -------------- | -------------- |

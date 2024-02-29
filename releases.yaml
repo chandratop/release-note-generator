@@ -1,1 +1,3 @@
-This file has many occurrences of 1.0.1
+release_note_generator:
+  repo: release-note-generator
+  release: 1.0.1

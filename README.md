@@ -1,4 +1,5 @@
 # release-note-generator
+<<<<<<< HEAD
 
 ## Required artifacts
 ```
@@ -52,3 +53,10 @@ rsync -av --ignore-existing $RNG .github/
 ```shell
 gh label clone chandratop/release-note-generator --repo owner/your-repository
 ```
+=======
+A demo repository to test out release note generation and aggregation
+
+test
+what
+asdas
+>>>>>>> 39824a235067cf6c6a7251779457ff68df365945

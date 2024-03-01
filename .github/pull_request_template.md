@@ -16,13 +16,13 @@
 -----
 
 ### Why?
-<!--- Describe why do we need to address this problem -->
+<!--- Describe why we need to address this problem -->
 - N/A
 
 -----
 
 ### How?
-<!--- Describe how are you addressing this problem -->
+<!--- Describe how you are addressing this problem -->
 - N/A
 
 -----

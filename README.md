@@ -47,7 +47,3 @@ $ cd /path/to/your-repository
 ```shell
 rsync -av $RNG .github/
 ```
-5. To copy all labels copy the `copy-labels.sh` script inside your repository and run it
-```shell
-$ ./copy-labels.sh$
-```

@@ -45,7 +45,7 @@ $ cd /path/to/your-repository
 ```
 4. Copy the necessary artifacts in your repository
 ```shell
-rsync -av --ignore-existing $RNG .github/
+rsync -av $RNG .github/
 ```
 5. To copy all labels copy the `copy-labels.sh` script inside your repository and run it
 ```shell

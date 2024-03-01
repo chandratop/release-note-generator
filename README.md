@@ -47,8 +47,7 @@ $ cd /path/to/your-repository
 ```shell
 rsync -av --ignore-existing $RNG .github/
 ```
-5. Delete all existing labels from your repository from GitHub UI.
-6. Clone the ones from `release-note-generator`
+5. To copy all labels copy the `copy-labels.sh` script inside your repository and run it
 ```shell
-gh label clone chandratop/release-note-generator --repo owner/your-repository
+$ ./copy-labels.sh$
 ```

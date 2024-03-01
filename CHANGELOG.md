@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0 [2024-03-01]
+| ID | Type | Title | Author | JIRA |
+| -------------- | -------------- | -------------- | -------------- | -------------- |
+| https://github.com/chandratop/release-note-generator/pull/26 | breaking | test brerak | @chandratop | [PLAT-1022](https://amagiengg.atlassian.net/browse/PLAT-2608), [PLAT-1022](https://amagiengg.atlassian.net/browse/PLAT-2608) |
 ## 2.0.0 [2024-02-29]
 | ID | Type | Title | Author | JIRA |
 | -------------- | -------------- | -------------- | -------------- | -------------- |

@@ -47,6 +47,13 @@ $ cd /path/to/your-repository
 ```shell
 rsync -av $RNG .github/
 ```
+5. To clone all the labels, first delete all the existing labels from the destination repo. Then run the following script which we copied in the previous step.
+```shell
+cd .github/scripts/
+chmod +x copy-labels.sh
+./copy-labels.sh <destination-repo-name> <destination-repo-name>
+```
+
 
 ### Replace new release tag in additional files
 If you would like to perform additional tag replacements, go to `.github/scripts/releaser.py` and search for the following section and edit it.

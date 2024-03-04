@@ -387,8 +387,9 @@ if __name__ == "__main__":
         with open("RELEASE.md", "w") as f:
             f.write(release_details["release"])
 
-        # update any file with the new release tag
-        for file_name in ["releases.yaml"]:
+        #TODO: update any additional files with the new release tag
+        additional_files = ["releases.yaml"]
+        for file_name in additional_files:
             with open(file_name) as f:
                 body = f.read()
             body = body.replace(f'{release.tag}', f'{release.next_tag}')

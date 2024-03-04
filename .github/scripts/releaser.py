@@ -202,6 +202,10 @@ class Release:
         else:
             return 2
 
+    def line_sort_key(self, line: str):
+        line_split = line.split("|")
+        return line_split[2].strip()
+
     def get_release_details(self) -> dict:
         """
         Read the release_template.md file and return the formatted release
@@ -215,8 +219,9 @@ class Release:
         # Get next tag
         self.next_tag = self.get_next_tag(index = self.get_tag_operation())
 
-        # Form the changelog_body
+        # Form the changelog_body and breaking_body
         changelog_body = f'## {self.next_tag} [{self.get_today()}]\n| ID | Type | Title | Author | JIRA |\n| -------------- | -------------- | -------------- | -------------- | -------------- |\n'
+        breaking_body = f'## {self.next_tag} [{self.get_today()}]\n'
 
         # Replace all template strings in body
         body = body.replace("NEXT_TAG", self.next_tag)
@@ -266,6 +271,10 @@ class Release:
             else:
                 groups["other"].append(line)
 
+        # Sort group based on type
+        groups["feat"].sort(key=self.line_sort_key)
+        groups["other"].sort(key=self.line_sort_key)
+
         # Update each group section in the body
         for key, value in groups.items():
             if value != []:
@@ -277,6 +286,8 @@ class Release:
                 body = body[:body_end_identifier_index] + lines + body[body_end_identifier_index:]
                 if key in ["feat", "break", "other"]:
                     changelog_body += lines
+                if key in ["break", "sop"]:
+                    breaking_body += lines
             else:
                 # Remove the section as there are no changes
                 header_start_identifier = f'<!--- {key} header start -->'
@@ -286,7 +297,7 @@ class Release:
                 body = body[:header_start_identifier_index] + body[body_end_identifier_index:]
 
         # Return formatted release body
-        return {"release": body, "changelog": changelog_body}
+        return {"release": body, "changelog": changelog_body, "breaking": breaking_body}
 
     def update_changelog(self, body) -> None:
         """
@@ -332,6 +343,23 @@ class Release:
         else:
             raise ValueError(f"Command failed: {cmd}\nError: {result.what}")
 
+    def update_breaking(self, body) -> None:
+        """
+        If the BREAKING.md file does not exist, create it.
+        If it exists, then update the breaking changes for the next release
+        """
+
+        if not os.path.exists("BREAKING.md"):
+            breaking = "# Breaking Changes\n"
+        else:
+            with open("BREAKING.md") as f:
+                breaking = f.read()
+        breaking_heading = "# Breaking Changes\n"
+        insert_index = len(breaking_heading) + 1
+        breaking = breaking[:insert_index] + body + breaking[insert_index:]
+        with open("BREAKING.md", "w+") as f:
+            f.write(breaking)
+
     def release(self) -> None:
         """
         Create release
@@ -351,6 +379,9 @@ if __name__ == "__main__":
 
         # write the changelog in CHANGELOG.md
         release.update_changelog(release_details["changelog"])
+
+        # write the breaking changes in BREAKING.md
+        release.update_breaking(release_details["breaking"])
 
         # write the release notes for the next release in RELEASE.md
         with open("RELEASE.md", "w") as f:

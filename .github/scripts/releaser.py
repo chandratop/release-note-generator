@@ -221,7 +221,7 @@ class Release:
 
         # Form the changelog_body and breaking_body
         changelog_body = f'## {self.next_tag} [{self.get_today()}]\n| ID | Type | Title | Author | JIRA |\n| -------------- | -------------- | -------------- | -------------- | -------------- |\n'
-        breaking_body = f'## {self.next_tag} [{self.get_today()}]\n'
+        breaking_body = f'## {self.next_tag} [{self.get_today()}]\n| ID | Type | Title | Author | JIRA |\n| -------------- | -------------- | -------------- | -------------- | -------------- |\n'
 
         # Replace all template strings in body
         body = body.replace("NEXT_TAG", self.next_tag)

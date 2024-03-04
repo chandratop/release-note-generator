@@ -47,3 +47,10 @@ $ cd /path/to/your-repository
 ```shell
 rsync -av $RNG .github/
 ```
+
+### Replace new release tag in additional files
+If you would like to perform additional tag replacements, go to `.github/scripts/releaser.py` and search for the following section and edit it.
+```py
+#TODO: update any additional files with the new release tag
+additional_files = ["releases.yaml"]
+```

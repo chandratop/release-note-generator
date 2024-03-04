@@ -287,6 +287,8 @@ class Release:
                 if key in ["feat", "break", "other"]:
                     changelog_body += lines
                 if key in ["break", "sop"]:
+                    if key == "sop":
+                        breaking_body += "\n"
                     breaking_body += lines
             else:
                 # Remove the section as there are no changes

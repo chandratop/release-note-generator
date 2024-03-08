@@ -358,6 +358,8 @@ class Release:
                 breaking = f.read()
         breaking_heading = "# Breaking Changes\n"
         insert_index = len(breaking_heading) + 1
+        if body.strip().endswith("-------------- |"):
+            return
         breaking = breaking[:insert_index] + body + breaking[insert_index:]
         with open("BREAKING.md", "w+") as f:
             f.write(breaking)

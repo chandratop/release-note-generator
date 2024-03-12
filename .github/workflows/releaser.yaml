@@ -23,7 +23,13 @@ jobs:
 
       - name: Extract branch name
         id: extract-branch-name
-        run: echo "BRANCH_NAME=$(gh pr view "${{ github.event.pull_request.number }}" --json headRefName | jq -r '.headRefName' | sed 's/release-//')" >> $GITHUB_ENV
+        run: |
+          echo "BRANCH_NAME=$(gh pr view "${{ github.event.pull_request.number }}" --json headRefName | jq -r '.headRefName' | sed 's/release-//')" >> $GITHUB_ENV
+          echo $BRANCH_NAME
+
+      - name: Extract branch name
+        run: |
+          echo ${{ steps.extract-branch-name.outputs.BRANCH_NAME }}
 
       - name: Trigger publish-artifacts-iota
         uses: peter-evans/repository-dispatch@v1

@@ -20,4 +20,4 @@ jobs:
 
       - name: Echo works
         run: |
-          echo "works"
+          echo "Tag name: ${{ github.event.client_payload.tag_name }}"

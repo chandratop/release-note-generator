@@ -1,7 +1,7 @@
 <!-- Release notes generated using automated workflow -->
 
-## 3.0.2
-[3.0.1..3.0.2](https://github.com/chandratop/release-note-generation-demo/compare/3.0.1..3.0.2)
+## 3.0.3
+[3.0.2..3.0.3](https://github.com/chandratop/release-note-generation-demo/compare/3.0.2..3.0.3)
 <!--- feat body end -->
 <!--- break body end -->
 <!--- sop body end -->
@@ -14,5 +14,5 @@
 <!--- other body start -->
 | ID | Type | Title | Author | JIRA |
 | -------------- | -------------- | -------------- | -------------- | -------------- |
-| https://github.com/chandratop/release-note-generator/pull/41 | chore | test repo dispatch | @chandratop | N/A |
+| https://github.com/chandratop/release-note-generator/pull/43 | chore | test1 | @chandratop | N/A |
 <!--- other body end -->

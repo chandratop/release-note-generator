@@ -21,10 +21,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
+      - name: Extract branch name without "release-" prefix
+        id: extract_branch_name
+        run: echo "BRANCH_NAME=${{ github.head_ref }}" >> $GITHUB_ENV
+
       - name: Trigger publish-artifacts-iota
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           event-type: trigger_publish-artifacts-iota
-          client-payload: '{"tag_name": "${{ github.ref }}"}'
+          client-payload: '{"tag_name": "${{ env.BRANCH_NAME/^\release-// }}" }'

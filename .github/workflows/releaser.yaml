@@ -20,3 +20,10 @@ jobs:
         run: "python3 .github/scripts/releaser.py ${{ github.event.pull_request.number }}"
         env:
           GH_TOKEN: ${{ github.token }}
+
+      - name: Trigger publish-artifacts-iota
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: trigger_publish-artifacts-iota

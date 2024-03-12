@@ -18,6 +18,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Echo works
-        run: |
-          echo "Tag name: ${{ github.event.client_payload.tag_name }}"
+      - name: Override github.ref_name with tag name
+        run: echo "ref_name=${{ github.event.client_payload.tag_name }}" >> $GITHUB_ENV
+
+      - name: Use overridden ref_name
+        run: echo ${{ github.ref_name }}

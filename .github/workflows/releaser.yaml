@@ -26,6 +26,8 @@ jobs:
         run: |
           echo "BRANCH_NAME=$(gh pr view "${{ github.event.pull_request.number }}" --json headRefName | jq -r '.headRefName' | sed 's/release-//')" >> $GITHUB_ENV
           echo $BRANCH_NAME
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Extract branch name
         run: |

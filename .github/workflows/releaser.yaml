@@ -27,3 +27,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           event-type: trigger_publish-artifacts-iota
+          client-payload: '{"tag_name": "${{ github.ref }}"}'

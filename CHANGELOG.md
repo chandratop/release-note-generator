@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.4 [2024-03-12]
+| ID | Type | Title | Author | JIRA |
+| -------------- | -------------- | -------------- | -------------- | -------------- |
+| https://github.com/chandratop/release-note-generator/pull/46 | chore | tes3 | @chandratop | N/A |
+| https://github.com/chandratop/release-note-generator/pull/45 | chore | test2 | @chandratop | N/A |
 ## 3.0.3 [2024-03-12]
 | ID | Type | Title | Author | JIRA |
 | -------------- | -------------- | -------------- | -------------- | -------------- |

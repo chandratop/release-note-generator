@@ -25,16 +25,15 @@ jobs:
 
   another_job_0:
     runs-on: ubuntu-latest
-    needs: build
     steps:
-      - name: Use TAG environment variable
-        env:
-          TAG: ${{ needs.build.outputs.TAG }}
-        run: echo $TAG
+      - name: Run bs
+        run: echo "bs"
 
   another_job:
     runs-on: ubuntu-latest
-    needs: another_job_0
+    needs:
+      - build
+      - another_job_0
     steps:
       - name: Use TAG environment variable
         env:

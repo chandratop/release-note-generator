@@ -41,5 +41,6 @@ jobs:
           event-type: trigger_publish-artifacts-iota
           client-payload: |
             {
-              "tag_name": ${{ steps.extract-branch-name.outputs.BRANCH_NAME }}
+              "tag_name": "${{ steps.extract-branch-name.outputs.BRANCH_NAME }}"
             }
+

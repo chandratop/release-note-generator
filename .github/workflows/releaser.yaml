@@ -31,7 +31,7 @@ jobs:
 
       - name: Extract branch name
         run: |
-          echo ${{ steps.extract-branch-name.outputs.BRANCH_NAME }}
+          echo ${{ env.BRANCH_NAME }}
 
       - name: Trigger publish-artifacts-iota
         uses: peter-evans/repository-dispatch@v1
@@ -39,5 +39,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           event-type: trigger_publish-artifacts-iota
-          client-payload: '{"tag_name": "${{ steps.extract-branch-name.outputs.BRANCH_NAME }}"}'
+          client-payload: '{"tag_name": "${{ env.BRANCH_NAME }}"}'
 

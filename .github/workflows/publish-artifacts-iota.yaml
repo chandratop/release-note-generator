@@ -24,4 +24,4 @@ jobs:
     needs: build
     steps:
       - name: Use TAG environment variable
-        run: echo $TAG
+        run: echo ${{ env.TAG }}

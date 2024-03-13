@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.12 [2024-03-13]
+| ID | Type | Title | Author | JIRA |
+| -------------- | -------------- | -------------- | -------------- | -------------- |
+| https://github.com/chandratop/release-note-generator/pull/62 | chore | test | @chandratop | N/A |
 ## 3.0.11 [2024-03-13]
 | ID | Type | Title | Author | JIRA |
 | -------------- | -------------- | -------------- | -------------- | -------------- |

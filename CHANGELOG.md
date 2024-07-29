@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.0 [2024-07-29]
+| ID | Type | Title | Author | JIRA |
+| -------------- | -------------- | -------------- | -------------- | -------------- |
+| https://github.com/chandratop/release-note-generator/pull/76 | enhancement | Enh test 1 | @chandratop | [PLAT-4742](https://amagiengg.atlassian.net/browse/PLAT-4742) |
+| https://github.com/chandratop/release-note-generator/pull/75 | bugfix | Bugfix pr 1 | @chandratop | [PLAT-4742](https://amagiengg.atlassian.net/browse/PLAT-4742) |
 ## 3.0.17 [2024-03-13]
 | ID | Type | Title | Author | JIRA |
 | -------------- | -------------- | -------------- | -------------- | -------------- |
